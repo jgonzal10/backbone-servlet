@@ -1,6 +1,9 @@
 package com.sourcecontribute.api;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Stack;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.sourcecontribute.models.Category;
 
 /**
  * Servlet implementation class CategoryListServlet
@@ -29,7 +33,11 @@ public class CategoryListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Gson gson = new Gson();
-		String result = gson.toJson("hello world");
+		Collection<Category> categories = new Stack<Category>();
+		categories.add(new Category(0, "books"));
+		categories.add(new Category(1, "music"));
+		categories.add(new Category(2, "toys"));
+		String result = gson.toJson(categories);
 		response.getWriter().write(result);
 	}
 
